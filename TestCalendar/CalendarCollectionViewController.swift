@@ -10,6 +10,8 @@ import UIKit
 
 class CalendarCollectionViewController: UICollectionViewController {
     
+    // MARK: Properties
+    
     let reuseIdentifier = "CalendarCollectionViewCell"
     
     var date = NSDate()
@@ -20,11 +22,15 @@ class CalendarCollectionViewController: UICollectionViewController {
     let maxRowsCount = 6
     private var monthInfo = [Int]()
     
+    // MARK: LifeCycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    func returnDateForMonth(month:NSInteger, year:NSInteger, day:NSInteger) -> NSDate {
+    // MARK: PrivateMethods
+
+    private func returnDateForMonth(month:NSInteger, year:NSInteger, day:NSInteger) -> NSDate {
         let comp = NSDateComponents()
         comp.month = month
         comp.year = year
@@ -34,19 +40,19 @@ class CalendarCollectionViewController: UICollectionViewController {
         return grego.dateFromComponents(comp)!
     }
     
-    func returnDateFofmatterFromDate(date: NSDate) -> String{
+    private func returnDateFofmatterFromDate(date: NSDate) -> String{
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "MMddyyyy"
         return dateFormatter.stringFromDate(date)
     }
     
-    func returnDayFromDate(date: NSDate) -> String{
+    private func returnDayFromDate(date: NSDate) -> String{
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "dd"
         return dateFormatter.stringFromDate(date)
     }
     
-    func returnPreviousMonthFromDate(date: NSDate) -> NSDate {
+    private func returnPreviousMonthFromDate(date: NSDate) -> NSDate {
         let components = NSDateComponents()
         components.setValue(-1, forComponent: .Month);
         return NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: self.date, options: NSCalendarOptions(rawValue: 0))!

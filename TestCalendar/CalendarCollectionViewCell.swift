@@ -10,6 +10,8 @@ import UIKit
 
 class CalendarCollectionViewCell: UICollectionViewCell {
     
+    // MARK: Properties
+
     @IBOutlet weak var dayUILabel: UILabel!
     @IBOutlet weak var appointmentUIView: UIView!
     
@@ -17,13 +19,7 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     let borderColor = UIColor.blueColor()
     
     var date = NSDate()
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        self.appointmentUIView.layoutIfNeeded()
-        self.appointmentUIView.layer.cornerRadius = self.appointmentUIView.frame.size.width / 2
-    }
-    
+
     var isToday : Bool = false {
         didSet {
             if isToday == true {
@@ -32,4 +28,13 @@ class CalendarCollectionViewCell: UICollectionViewCell {
             }
         }
     }
+    
+    // MARK: LifeCycle
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.appointmentUIView.layoutIfNeeded()
+        self.appointmentUIView.layer.cornerRadius = self.appointmentUIView.frame.size.width / 2
+    }
+
 }

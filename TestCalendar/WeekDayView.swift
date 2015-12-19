@@ -10,6 +10,8 @@ import UIKit
 
 class WeekDayView: UIView {
     
+    // MARK: Properties
+
     @IBInspectable var cornerRadius: CGFloat = 0 {
         didSet {
             layer.cornerRadius = cornerRadius

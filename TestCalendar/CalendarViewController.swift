@@ -10,12 +10,16 @@ import UIKit
 
 class CalendarViewController: UIViewController {
 
+    // MARK: Properties
+
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet var todayBarButtonItem: UIBarButtonItem!
     
     var date = NSDate()
     var pageController = UIPageViewController()
+
+    // MARK: LifeCycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,9 +127,21 @@ class CalendarViewController: UIViewController {
             self.monthLabel.text = monthName.uppercaseString + " " + String(year)
         }
     }
+    
+    private func getItemController(date: NSDate) -> CalendarCollectionViewController? {
+        
+        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("CalendarCollectionViewController") as! CalendarCollectionViewController
+        
+        controller.date = date
+        
+        return controller
+    }
+    
 }
 
 extension CalendarViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+    
+    // MARK: UIPageViewControllerDataSource
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
         
@@ -154,6 +170,8 @@ extension CalendarViewController: UIPageViewControllerDataSource, UIPageViewCont
         return controller
     }
     
+    // MARK: UIPageViewControllerDelegate
+    
     func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         guard
             let controllers = pageViewController.viewControllers else {
@@ -162,14 +180,5 @@ extension CalendarViewController: UIPageViewControllerDataSource, UIPageViewCont
         let controller = controllers.first as! CalendarCollectionViewController
         self.getMonthFromDate(controller.date)
     }
-    
-    private func getItemController(date: NSDate) -> CalendarCollectionViewController? {
-        
-        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("CalendarCollectionViewController") as! CalendarCollectionViewController
 
-        controller.date = date
-        
-        return controller
-    }
-    
 }
